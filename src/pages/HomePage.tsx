@@ -8,6 +8,7 @@ import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
 import ParticleNetwork from '../components/ParticleNetwork';
+import TutorWidget from '../components/TutorWidget';
 
 const HomePage: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage: React.FC = () => {
       <Testimonials />
       <CTA />
       <Footer />
+      <TutorWidget />
     </div>
   );
 };
