@@ -1,326 +1,181 @@
-/* public/index.html - Add this to your <head> section */
-/* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ========================================= */
-/* 1. CSS Reset & Base Styles                */
-/* ========================================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Custom animations and utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-morphism-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-border {
+    position: relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+  }
 }
 
-html {
-  font-size: 16px; /* Base font size for rem units */
-  scroll-behavior: smooth;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-body {
-  font-family: 'Inter', sans-serif; /* Modern, clean sans-serif font */
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--text-color);
-  background-color: var(--background-body);
-  overflow-x: hidden; /* Prevent horizontal scroll due to layout issues */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ========================================= */
-/* 2. CSS Custom Properties (Variables)      */
-/* ========================================= */
-:root {
-  /* Colors */
-  --primary-color: #4A90E2;       /* A vibrant blue for primary actions/branding */
-  --primary-light: #7FABDF;      /* Lighter primary for highlights */
-  --primary-dark: #357ABD;       /* Darker primary for hover/active states */
-  --secondary-color: #50B3A2;     /* A teal accent for secondary elements */
-  --accent-color: #FFC107;        /* A warm yellow for emphasis/warnings */
-
-  --text-color: #333333;          /* Dark gray for main text */
-  --text-light: #666666;          /* Lighter gray for secondary text */
-  --text-white: #ffffff;         /* White text, for use on dark backgrounds */
-  --border-color: #e0e0e0;        /* Light gray for borders */
-  --background-body: #f8f9fa;     /* Very light gray for main background */
-  --background-card: #ffffff;    /* White for cards and containers */
-  --background-dark: #2c3e50;     /* Dark background for sections like footer/hero */
-
-  /* Spacing Scale (based on 8px grid) */
-  --spacing-xxs: 0.25rem; /* 4px */
-  --spacing-xs: 0.5rem;   /* 8px */
-  --spacing-sm: 1rem;     /* 16px */
-  --spacing-md: 1.5rem;   /* 24px */
-  --spacing-lg: 2rem;     /* 32px */
-  --spacing-xl: 3rem;     /* 48px */
-  --spacing-xxl: 4rem;    /* 64px */
-
-  /* Typography Scale */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-md: 1.125rem; /* 18px */
-  --font-size-lg: 1.25rem; /* 20px */
-  --font-size-xl: 1.5rem; /* 24px */
-  --font-size-xxl: 2rem; /* 32px */
-  --font-size-xxxl: 2.5rem; /* 40px */
-  --font-size-xxxxl: 3rem; /* 48px */
-
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-
-  /* Border Radius */
-  --border-radius-sm: 0.25rem;
-  --border-radius-md: 0.5rem;
-  --border-radius-lg: 0.75rem;
-
-  /* Transitions */
-  --transition-speed: 0.3s;
-  --transition-ease: ease-in-out;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
-/* ========================================= */
-/* 3. Typography                             */
-/* ========================================= */
-h1, h2, h3, h4, h5, h6 {
-  margin-bottom: var(--spacing-sm);
-  line-height: 1.2;
-  font-weight: 600; /* Semi-bold for headings */
-  color: var(--text-color);
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
+  }
 }
 
-h1 { font-size: var(--font-size-xxxl); margin-top: var(--spacing-lg); }
-h2 { font-size: var(--font-size-xxl); margin-top: var(--spacing-lg); }
-h3 { font-size: var(--font-size-xl); margin-top: var(--spacing-md); }
-h4 { font-size: var(--font-size-lg); margin-top: var(--spacing-md); }
-h5 { font-size: var(--font-size-md); margin-top: var(--spacing-sm); }
-h6 { font-size: var(--font-size-base); margin-top: var(--spacing-sm); }
-
-p {
-  margin-bottom: var(--spacing-sm);
-  font-size: var(--font-size-base);
-  color: var(--text-light);
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
 }
 
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color var(--transition-speed) var(--transition-ease);
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-a:hover {
-  color: var(--primary-dark);
-  text-decoration: underline;
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
 
-strong {
-  font-weight: 600;
-  color: var(--text-color);
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 4px;
 }
 
-/* ========================================= */
-/* 4. General UI Elements Enhancements     */
-/* ========================================= */
-
-/* Container for general content centering */
-.container {
-  max-width: 1200px; /* Or appropriate max-width for your design */
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
 }
 
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: var(--border-radius-sm);
-  transition: background-color var(--transition-speed) var(--transition-ease),
-              color var(--transition-speed) var(--transition-ease),
-              box-shadow var(--transition-speed) var(--transition-ease);
-  border: 1px solid transparent;
-  box-shadow: var(--shadow-sm);
+/* Selection styling */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: white;
 }
 
+/* Focus styles */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+/* Custom button styles */
 .btn-primary {
-  background-color: var(--primary-color);
-  color: var(--text-white);
-  border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
-  box-shadow: var(--shadow-md);
+  @apply bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
 }
 
 .btn-secondary {
-  background-color: var(--secondary-color);
-  color: var(--text-white);
-  border-color: var(--secondary-color);
+  @apply glass-morphism text-white font-semibold py-3 px-6 rounded-xl hover:bg-white/20 transform hover:scale-105 transition-all duration-300;
 }
 
-.btn-secondary:hover {
-  background-color: #409285; /* Slightly darker secondary */
-  border-color: #409285;
-  box-shadow: var(--shadow-md);
+/* Input styles */
+.input-field {
+  @apply w-full glass-morphism-dark rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300;
 }
 
-.btn-outline {
-  background-color: transparent;
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+/* Card styles */
+.card-hover {
+  @apply transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-500;
 }
 
-.btn-outline:hover {
-  background-color: var(--primary-color);
-  color: var(--text-white);
-  box-shadow: var(--shadow-md);
+/* Text gradient utilities */
+.text-gradient-primary {
+  @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
 }
 
-/* Forms - Inputs & Textareas */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
-  width: 100%;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-base);
-  color: var(--text-color);
-  background-color: var(--background-card);
-  transition: border-color var(--transition-speed) var(--transition-ease),
-              box-shadow var(--transition-speed) var(--transition-ease);
+.text-gradient-secondary {
+  @apply bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); /* Focus ring */
+/* Background patterns */
+.bg-pattern-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-/* Cards (for Courses, Testimonials, etc.) */
-.card {
-  background-color: var(--background-card);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-md); /* Add margin for spacing between cards */
-  transition: transform var(--transition-speed) var(--transition-ease),
-              box-shadow var(--transition-speed) var(--transition-ease);
-}
-
-.card:hover {
-  transform: translateY(-5px); /* Subtle lift effect */
-  box-shadow: var(--shadow-md);
-}
-
-/* Images */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block; /* Remove extra space below images */
-}
-
-/* Section Headings (for HomePage sections like Courses, Testimonials) */
-.section-heading {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  color: var(--text-color);
-}
-
-.section-heading h2 {
-  font-size: var(--font-size-xxxl);
-  margin-bottom: var(--spacing-sm);
-}
-
-.section-heading p {
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: var(--font-size-lg);
-  color: var(--text-light);
-}
-
-/* ========================================= */
-/* 5. Utility Classes (Optional but helpful) */
-/* ========================================= */
-
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.d-flex { display: flex; }
-.justify-content-center { justify-content: center; }
-.align-items-center { align-items: center; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-column { flex-direction: column; }
-
-/* Margin utilities */
-.mt-sm { margin-top: var(--spacing-sm); }
-.mb-sm { margin-bottom: var(--spacing-sm); }
-.ml-sm { margin-left: var(--spacing-sm); }
-.mr-sm { margin-right: var(--spacing-sm); }
-.my-sm { margin-top: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
-.mx-sm { margin-left: var(--spacing-sm); margin-right: var(--spacing-sm); }
-/* ... you can add more for md, lg, etc. */
-
-/* Padding utilities */
-.p-sm { padding: var(--spacing-sm); }
-.px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
-/* ... you can add more */
-
-/* ========================================= */
-/* 6. Basic Responsiveness                   */
-/* ========================================= */
-
-/* Small devices (phones, 600px and down) */
-@media (max-width: 600px) {
-  html {
-    font-size: 15px; /* Slightly smaller base font on small screens */
-  }
-
-  h1 { font-size: var(--font-size-xxl); }
-  h2 { font-size: var(--font-size-xl); }
-  h3 { font-size: var(--font-size-lg); }
-
-  .container {
-    padding: 0 var(--spacing-sm); /* Reduce padding on smaller screens */
-  }
-
-  .btn {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-sm);
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-lg);
-  }
-}
-
-/* Large devices (desktops, 1024px and up) */
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--spacing-xl);
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .container {
-    padding: 0 var(--spacing-xxl);
-  }
+.bg-pattern-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
