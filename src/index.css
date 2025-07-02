@@ -1,0 +1,326 @@
+/* public/index.html - Add this to your <head> section */
+/* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> */
+
+/* ========================================= */
+/* 1. CSS Reset & Base Styles                */
+/* ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px; /* Base font size for rem units */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif; /* Modern, clean sans-serif font */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  background-color: var(--background-body);
+  overflow-x: hidden; /* Prevent horizontal scroll due to layout issues */
+}
+
+/* ========================================= */
+/* 2. CSS Custom Properties (Variables)      */
+/* ========================================= */
+:root {
+  /* Colors */
+  --primary-color: #4A90E2;       /* A vibrant blue for primary actions/branding */
+  --primary-light: #7FABDF;      /* Lighter primary for highlights */
+  --primary-dark: #357ABD;       /* Darker primary for hover/active states */
+  --secondary-color: #50B3A2;     /* A teal accent for secondary elements */
+  --accent-color: #FFC107;        /* A warm yellow for emphasis/warnings */
+
+  --text-color: #333333;          /* Dark gray for main text */
+  --text-light: #666666;          /* Lighter gray for secondary text */
+  --text-white: #ffffff;         /* White text, for use on dark backgrounds */
+  --border-color: #e0e0e0;        /* Light gray for borders */
+  --background-body: #f8f9fa;     /* Very light gray for main background */
+  --background-card: #ffffff;    /* White for cards and containers */
+  --background-dark: #2c3e50;     /* Dark background for sections like footer/hero */
+
+  /* Spacing Scale (based on 8px grid) */
+  --spacing-xxs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+  --spacing-xxl: 4rem;    /* 64px */
+
+  /* Typography Scale */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1.125rem; /* 18px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 1.5rem; /* 24px */
+  --font-size-xxl: 2rem; /* 32px */
+  --font-size-xxxl: 2.5rem; /* 40px */
+  --font-size-xxxxl: 3rem; /* 48px */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* Border Radius */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+  --transition-ease: ease-in-out;
+}
+
+/* ========================================= */
+/* 3. Typography                             */
+/* ========================================= */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
+  font-weight: 600; /* Semi-bold for headings */
+  color: var(--text-color);
+}
+
+h1 { font-size: var(--font-size-xxxl); margin-top: var(--spacing-lg); }
+h2 { font-size: var(--font-size-xxl); margin-top: var(--spacing-lg); }
+h3 { font-size: var(--font-size-xl); margin-top: var(--spacing-md); }
+h4 { font-size: var(--font-size-lg); margin-top: var(--spacing-md); }
+h5 { font-size: var(--font-size-md); margin-top: var(--spacing-sm); }
+h6 { font-size: var(--font-size-base); margin-top: var(--spacing-sm); }
+
+p {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  color: var(--text-light);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) var(--transition-ease);
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* ========================================= */
+/* 4. General UI Elements Enhancements     */
+/* ========================================= */
+
+/* Container for general content centering */
+.container {
+  max-width: 1200px; /* Or appropriate max-width for your design */
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-speed) var(--transition-ease),
+              color var(--transition-speed) var(--transition-ease),
+              box-shadow var(--transition-speed) var(--transition-ease);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-white);
+  border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: #409285; /* Slightly darker secondary */
+  border-color: #409285;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  box-shadow: var(--shadow-md);
+}
+
+/* Forms - Inputs & Textareas */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  background-color: var(--background-card);
+  transition: border-color var(--transition-speed) var(--transition-ease),
+              box-shadow var(--transition-speed) var(--transition-ease);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); /* Focus ring */
+}
+
+/* Cards (for Courses, Testimonials, etc.) */
+.card {
+  background-color: var(--background-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md); /* Add margin for spacing between cards */
+  transition: transform var(--transition-speed) var(--transition-ease),
+              box-shadow var(--transition-speed) var(--transition-ease);
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Subtle lift effect */
+  box-shadow: var(--shadow-md);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Remove extra space below images */
+}
+
+/* Section Headings (for HomePage sections like Courses, Testimonials) */
+.section-heading {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-color);
+}
+
+.section-heading h2 {
+  font-size: var(--font-size-xxxl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-heading p {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: var(--font-size-lg);
+  color: var(--text-light);
+}
+
+/* ========================================= */
+/* 5. Utility Classes (Optional but helpful) */
+/* ========================================= */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.d-flex { display: flex; }
+.justify-content-center { justify-content: center; }
+.align-items-center { align-items: center; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-column { flex-direction: column; }
+
+/* Margin utilities */
+.mt-sm { margin-top: var(--spacing-sm); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.ml-sm { margin-left: var(--spacing-sm); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.my-sm { margin-top: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
+.mx-sm { margin-left: var(--spacing-sm); margin-right: var(--spacing-sm); }
+/* ... you can add more for md, lg, etc. */
+
+/* Padding utilities */
+.p-sm { padding: var(--spacing-sm); }
+.px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+/* ... you can add more */
+
+/* ========================================= */
+/* 6. Basic Responsiveness                   */
+/* ========================================= */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  html {
+    font-size: 15px; /* Slightly smaller base font on small screens */
+  }
+
+  h1 { font-size: var(--font-size-xxl); }
+  h2 { font-size: var(--font-size-xl); }
+  h3 { font-size: var(--font-size-lg); }
+
+  .container {
+    padding: 0 var(--spacing-sm); /* Reduce padding on smaller screens */
+  }
+
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 var(--spacing-xxl);
+  }
+}
